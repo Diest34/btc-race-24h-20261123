@@ -2,13 +2,13 @@
 
 Strategy (paper money, $1,000 start, long only, one open position):
 - Trend filter: EMA(12) of 1-minute closes above EMA(48).
-- Primary entry (uptrend): the close is at least 0.8% below the 60-bar high
+- Primary entry (uptrend): the close is at least 0.6% below the 60-bar high
   and ticks up from the previous close -> buy with all cash.
 - Fallback entry (no uptrend): the close is at least 1.2% below the
   60-bar high and ticks up -> buy with half the cash. This keeps the bot
   trading (the race needs at least 1 trade) in a falling market while
   risking only half size there.
-- Exit: take profit at +1.2% or stop loss at -0.8% from the average entry
+- Exit: take profit at +1.0% or stop loss at -1.0% from the average entry
   price (cost basis). After a stop loss, no new entry for 60 bars.
 - Every order names max_slippage_bps 150 (1.5%) against the latest close.
 
@@ -33,10 +33,10 @@ SYMBOL = "CBBTC"
 EMA_FAST = 12
 EMA_SLOW = 48
 HISTORY_BARS = 60          # window for the dip reference high
-DIP_BPS = 80               # 0.8% below the 60-bar high (uptrend entry)
+DIP_BPS = 60               # 0.6% below the 60-bar high (uptrend entry)
 DIP_CT_BPS = 120           # 1.2% below the 60-bar high (fallback entry)
-TAKE_PROFIT_BPS = 120      # +1.2% from the average entry price
-STOP_LOSS_BPS = 80         # -0.8% from the average entry price
+TAKE_PROFIT_BPS = 100      # +1.0% from the average entry price
+STOP_LOSS_BPS = 100        # -1.0% from the average entry price
 COOLDOWN_BARS = 60         # no new entry for this many bars after a stop
 MAX_SLIPPAGE_BPS = 150     # 1.5% against the latest close
 MIN_HISTORY = EMA_SLOW + 2  # bars of history before the first entry
